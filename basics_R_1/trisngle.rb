@@ -6,10 +6,16 @@ b = gets.chomp.to_i
 print "c = "
 c = gets.chomp.to_i
 
-if a == b && b == c
+if a > b && a > c && a**2 == b ** 2 + c ** 2
+  puts "Треугольник прямоугольный"
+elsif b > a && b > c && a**2 == b ** 2 + c ** 2
+  puts "Треугольник прямоугольный"
+elsif c > b && c > a && a**2 == b ** 2 + c ** 2
+      puts "Треугольник прямоугольный"
+elsif a == b && b == c
   puts "Треугольник равносторонний"
-elsif a == b || b == c
+elsif a ==b || b == c
   puts "Треугольник равнобедренный"
 else
-  puts "Треугольник другой"
+  puts "Треугольник разносторонний"
 end
