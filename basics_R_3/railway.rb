@@ -1,20 +1,20 @@
 class Station
-attr_reader :station_name, :list_passenger, :list_cargo, :trains
+attr_reader :name, :list_passenger, :list_cargo, :trains
 
-  def initialize(station_name)
-    @station_name = station_name
+  def initialize(name)
+    @name = name
     @trains = []
     @list_passenger = []
     @list_cargo = []
   end
 
   def add_train(train)
-    if train.location_station.station_name == @station_name
+    if train.location_station.name == @name
       @trains << train
         if train.tipe == 'passenger'
-          @list_passenger << train.name_train
+          @list_passenger << train.name
         else
-          @list_cargo << train.name_train
+          @list_cargo << train.name
         end
     else
       puts "Поезда нет на станции"
@@ -59,10 +59,10 @@ class Route
 end
 
 class Train
-  attr_reader :name_train, :tipe, :current_speed
+  attr_reader :name, :tipe, :current_speed
   attr_accessor :number_of_wagons, :location_station, :previous_station, :next_station, :route
-  def initialize(name_train, tipe, number_wagons, current_speed = 0)
-    @name_train = name_train
+  def initialize(name, tipe, number_wagons, current_speed = 0)
+    @name = name
     @tipe = tipe
     @number_of_wagons = number_wagons
     @current_speed = current_speed
@@ -142,13 +142,13 @@ s1.add_train(t2)
 
 s1.print_list_tipe
 
-puts t1.location_station.station_name
+puts t1.location_station.name
 t1.station_up
-puts t1.location_station.station_name
+puts t1.location_station.name
 
-puts t2.location_station.station_name
+puts t2.location_station.name
 t2.station_down
-puts t2.location_station.station_name
+puts t2.location_station.name
 
 
 
