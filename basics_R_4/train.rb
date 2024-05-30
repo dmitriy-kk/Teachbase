@@ -57,7 +57,7 @@ class Train
     @location_station.add_train(self)
   end
 
-  protected
+  protected #методы не являються интерфейсами класса
 
   attr_accessor :previous_station, :next_station, :current_speed
   attr_reader :route
