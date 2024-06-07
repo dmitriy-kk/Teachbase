@@ -33,16 +33,3 @@ module InstanceCounter
     end
   end
 end 
-
-class Test
-  include InstanceCounter
-  
-  def initialize
-    self.register_instances 
-  end
-  
-end
-
-
-
-

@@ -136,6 +136,8 @@ class Interface
     elsif @trains[name].class == CargoTrain
       @trains[name].add_wagon(CargoWagon.new)
       puts "К поезду #{name} прицеплено #{@trains[name].wagons.count} вагонов"
+      puts "Список производителей вагонов: "
+      @trains[name].wagons.each{|i| puts i.company_name}
     else
       puts "Такого поезда нет в списке"
     end
