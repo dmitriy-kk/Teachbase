@@ -63,15 +63,15 @@ class Interface
 #2
   def train_new
       puts "Введите номер поезда"
-      name = gets.chomp
+      number = gets.chomp.to_i
       puts "Введите тип поезда если Пассажиркий - 1, если грузовой - 2"
       type = gets.chomp.to_i
       if type == 1
-          @trains[name] = PassengerTrain.new(name.to_s)
-          puts "Построен пассажирский поезд: #{@trains[name].name}"
+          @trains[number] = PassengerTrain.new(number)
+          puts "Построен пассажирский поезд: #{@trains[number].number}"
       elsif type == 2
-          @trains[name] = CargoTrain.new(name)
-          puts "Построен грузовой поезд: #{@trains[name].name}"
+          @trains[number] = CargoTrain.new(number)
+          puts "Построен грузовой поезд: #{@trains[number].number}"
       else
           puts "Такого типа поездов не существует"
       end
@@ -79,7 +79,7 @@ class Interface
 #3 
   def route_new
     puts "Введите название маршрута"
-    name = gets.chomp
+    name = gets.chomp.downcase.to_s
     puts "Введите начальную точку маршрута"
     station1 = gets.chomp.downcase.to_s
     if @stations.include?(station1)
@@ -99,7 +99,7 @@ class Interface
 #4
   def add_down_station_route
     puts "Введите название маршрута"
-    name_route = gets.chomp
+    name_route = gets.chomp.downcase.to_s
     puts "Введите название станции"
     name = gets.chomp.downcase.to_s
     puts "Для добавления станции нажмите - 1, удаления - 2"
@@ -121,23 +121,23 @@ class Interface
     puts "Введите название маршрута"
     name_route = gets.chomp.to_s
     puts "Введите номер поезда"
-    name = gets.chomp.to_s
-    @trains[name].add_route(@routes[name_route])
+    number = gets.chomp.to_s
+    @trains[number].add_route(@routes[name_route])
   end
 #6
   def add_wagon
     puts "Введите номер поезда"
-    name = gets.chomp
-    if @trains[name].class == PassengerTrain
-      @trains[name].add_wagon(PassengerWagon.new)
-      puts "К поезду #{name} прицеплено #{@trains[name].wagons.count} вагонов"
+    number = gets.chomp.to_i
+    if @trains[number].type == :passenger
+      @trains[number].add_wagon(PassengerWagon.new)
+      puts "К поезду #{number} прицеплено #{@trains[number].wagons.count} вагонов"
       puts "Список производителей вагонов: "
-      @trains[name].wagons.each{|i| puts i.company_name}
-    elsif @trains[name].class == CargoTrain
-      @trains[name].add_wagon(CargoWagon.new)
-      puts "К поезду #{name} прицеплено #{@trains[name].wagons.count} вагонов"
+      @trains[number].wagons.each{|i| puts i.company_name}
+    elsif @trains[number].type == :cargo
+      @trains[number].add_wagon(CargoWagon.new)
+      puts "К поезду #{number} прицеплено #{@trains[number].wagons.count} вагонов"
       puts "Список производителей вагонов: "
-      @trains[name].wagons.each{|i| puts i.company_name}
+      @trains[number].wagons.each{|i| puts i.company_name}
     else
       puts "Такого поезда нет в списке"
     end
@@ -145,8 +145,9 @@ class Interface
 #7
   def delete_wagon
     puts "Введите номер поезда"
-    name = gets.chomp
-    @trains[name].delete_wagon
+    number = gets.chomp.to_i
+    @trains[number].delete_wagon
+    puts "К поезду #{number} прицеплено #{@trains[number].wagons.count} вагонов"
   end
 #8
   def drive_station_up_down
@@ -165,12 +166,12 @@ class Interface
         when 123
           break
         when 1
-          @trains[name].station_up
+          @trains[number].station_up
         when 2
-          @trains[name].station_down
+          @trains[number].station_down
       end
     end
-    puts "Поезд прибыл на станцию #{@trains[name].location_station.name}"
+    puts "Поезд прибыл на станцию #{@trains[number].location_station.name}"
   end
 #9
   def list_station_list_trins_at_station

@@ -56,11 +56,11 @@ t2.station_down
 puts "поезд t2 переместился на станцию #{t2.location_station.name}"
 
 print "список поездов на станции k1: " 
-k1.trains.each {|t| puts t.name}
+k1.trains.each {|t| puts t.number}
 print "список поездов на станции e1: " 
-e1.trains.each {|t| puts t.name}
+e1.trains.each {|t| puts t.number}
 print "список поездов на станции k2: " 
-k2.trains.each {|t| puts t.name}
+k2.trains.each {|t| puts t.number}
 
 puts "Количество созданных пасажирских вагонов: #{PassengerWagon.instances}; грузовых: #{CargoWagon.instances}"
 puts "Количество созданных пасажирских поездов: #{PassengerTrain.instances}; грузовых: #{CargoTrain.instances}"

@@ -1,4 +1,7 @@
 class Train
+  attr_reader :number, :location_station, :wagons, :route, :type
+  attr_writer :wagons
+
   include CompanyName
   include InstanceCounter
 
@@ -15,18 +18,15 @@ class Train
     end
   end
   
-  attr_reader :name, :location_station, :wagons, :route
-  attr_writer :wagons
-
-  def initialize(name)
+  def initialize(number)
     @wagons = []
     @current_speed = 0
-    #@route = []
+    @type = type
     @location_station = location_station
-    @name = name
+    @number = number
     inter_company_name
     self.register_instances
-    @@trains[name] = self
+    @@trains[number] = self
   end
 
   def speed_up(up)
@@ -79,7 +79,7 @@ class Train
   protected #методы не являються интерфейсами класса
 
   attr_accessor :previous_station, :next_station, :current_speed
-  attr_reader 
+   
   
   def stop
     self.current_speed = 0

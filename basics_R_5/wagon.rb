@@ -1,6 +1,7 @@
-class CargoWagon
+class Wagon
   include InstanceCounter
   include CompanyName
+  attr_reader :type
   def initialize
     self.register_instances
     inter_company_name
