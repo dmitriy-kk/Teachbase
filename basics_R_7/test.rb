@@ -39,21 +39,21 @@ k1.add_train(c1)
 
 t1.add_wagon(PassengerWagon.new(3))
 t1.wagons[0].boarding
-puts "сел пассажир #{t1.wagons[0].take_seat}"
-puts "свободных мест #{t1.wagons[0].available_seat}"
+puts "село пассажиров #{t1.wagons[0].used_capacity}"
+puts "свободных мест #{t1.wagons[0].free_capacity}"
 t1.wagons[0].boarding
-puts "сел пассажир #{t1.wagons[0].take_seat}"
+puts "село пассажиров #{t1.wagons[0].used_capacity}"
 t1.wagons[0].boarding
-puts "сел пассажир #{t1.wagons[0].take_seat}"
+puts "село пассажиров #{t1.wagons[0].used_capacity}"
 t1.wagons[0].boarding
-puts "сел пассажир #{t1.wagons[0].take_seat}"
-puts "свободных мест #{t1.wagons[0].available_seat}"
+puts "село пассажиров #{t1.wagons[0].used_capacity}"
+puts "свободных мест #{t1.wagons[0].free_capacity}"
 
 t1.add_wagon(PassengerWagon.new(3))
 t1.add_wagon(PassengerWagon.new(3))
 c1.add_wagon(CargoWagon.new(3))
 puts "загрузили #{c1.wagons[0].loading(1)}"
-puts "свободный объем #{c1.wagons[0].available_tonnage}"
+puts "свободный объем #{c1.wagons[0].free_capacity}"
 puts "загрузили #{c1.wagons[0].loading(2)}"
 puts "загрузили #{c1.wagons[0].loading(2)}"
 puts "К поезду t1 зацеплено: #{t1.wagons}"
@@ -97,9 +97,9 @@ puts "Поезда на станции e2:"
 puts e2.block_trains{|t| puts "Номер поезда: #{t.number}; тип: #{t.type}; количество вагонов: #{t.wagons.count}." }
 
 puts "Wagons t1"
-t1.block_wagons {|w| puts "номер вагона #{t1.wagons.index(w) + 1}; тип #{w.type}; свободных мест: #{w.available_seat}; занятых мест: #{w.take_seat}."}
+t1.block_wagons {|w| puts "номер вагона #{t1.wagons.index(w) + 1}; тип #{w.type}; свободных мест: #{w.free_capacity}; занятых мест: #{w.used_capacity}."}
 puts "Wagons c1"
-c1.block_wagons {|w| puts "номер вагона #{c1.wagons.index(w) + 1}; тип #{w.type}; свободный объем: #{w.available_tonnage}; занятых мест: #{w.take_tonnage}."}
+c1.block_wagons {|w| puts "номер вагона #{c1.wagons.index(w) + 1}; тип #{w.type}; свободный объем: #{w.free_capacity}; занятый объём: #{w.used_capacity}."}
 puts "Station k1"
 k1.block_trains {|t| puts "Номер поезда: #{t.number}; тип: #{t.type}; количество вагонов: #{t.wagons.count}." }
 puts "Station e1"

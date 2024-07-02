@@ -233,8 +233,8 @@ class Interface
         begin
           puts "Введите номер поезда"
           number = gets.chomp.downcase.to_s
-          trains[number].block_wagons {|w| puts "Номер вагона #{trains[number].wagons.index(w) + 1}; тип #{w.type}; свободных мест: #{w.available_seat}; занятых мест: #{w.take_seat}."} if trains[number].type == :passenger
-          trains[number].block_wagons {|w| puts "Номер вагона #{trains[number].wagons.index(w) + 1}; тип #{w.type}; свободных мест: #{w.available_tonnage}; занятых мест: #{w.take_tonnage}."} if trains[number].type == :cargo
+          trains[number].block_wagons {|w| puts "Номер вагона #{trains[number].wagons.index(w) + 1}; тип #{w.type}; свободных мест: #{w.free_capacity}; занятых мест: #{w.used_capacity}."} if trains[number].type == :passenger
+          trains[number].block_wagons {|w| puts "Номер вагона #{trains[number].wagons.index(w) + 1}; тип #{w.type}; свободный объём: #{w.free_capacity}; занятый объём: #{w.used_capacity}."} if trains[number].type == :cargo
         rescue StandardError
           puts "Поезд не создан или допущена ошибка при вводе!!!"
           puts "Список созданных поездов:"
