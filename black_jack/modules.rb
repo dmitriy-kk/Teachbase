@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Validation
   def self.included(base)
     base.extend ClassMethods
     base.include InstanceMethods
   end
+
   module ClassMethods
     attr_reader :validations
 
@@ -42,7 +45,6 @@ module Validation
 end
 
 module Cash
-  
   attr_accessor :wallet
 
   def top_up_bank
@@ -54,16 +56,15 @@ module Cash
   end
 end
 
-
 module Menu
   private
 
-  ACTION_NUMBER = { '1' => 'draw', '2' => 'add_card', '3' => 'result_game'}.freeze
+  ACTION_NUMBER = { '1' => 'draw', '2' => 'add_card', '3' => 'result_game' }.freeze
 
   def action_selection(choice)
     method(ACTION_NUMBER[choice]).call
   rescue StandardError
-    puts "Введен неверный номер команды"
+    puts 'Введен неверный номер команды'
   end
 
   def get_user_input(message)
@@ -74,6 +75,7 @@ end
 
 module Point
   private
+
   def point(card_draw)
     p1 = 0
     card_draw.each do |i|
@@ -81,17 +83,17 @@ module Point
         p1 += p
       end
     end
-    p1
-    if p1 > 21 && card_draw.to_s.include?("A") == true
-      p1 = p1 - 10
+    if p1 > 21 && card_draw.to_s.include?('A') == true
+      p1 -= 10
     else
       p1
-    end      
+    end
   end
 end
 
 module Finish_game
   private
+
   def finish_game
     puts "баланс игрока: #{@player.wallet}"
     puts "баланс дилера: #{@dealer.wallet}"
@@ -105,26 +107,25 @@ end
 
 module Output_results
   private
+
   def output_results_dealer
     puts "Карты #{@dealer.name}"
-    @dealer.card_draw.each{ |i| i.each{ |k, v| puts k.to_s} }
+    @dealer.card_draw.each { |i| i.each_key { |k| puts k } }
     puts "Очки: #{point(@dealer.card_draw)}"
     puts
   end
 
   def output_results_player
-    puts "Карты #{@player.name}" 
-    @player.card_draw.each{ |i| i.each{ |k, v| puts k.to_s} }
+    puts "Карты #{@player.name}"
+    @player.card_draw.each { |i| i.each_key { |k| puts k } }
     puts "Очки: #{point(@player.card_draw)}"
     puts
   end
 
   def hide_output_results_dealer
     puts "Карты #{@dealer.name}"
-    @dealer.card_draw.each{ |i| i.each{ |k, v| puts k.to_s.gsub(/\w|\W/, '*')} }
+    @dealer.card_draw.each { |i| i.each_key { |k| puts k.to_s.gsub(/\w|\W/, '*') } }
     puts "Очки: #{point(@dealer.card_draw).to_s.gsub(/\w|\W/, '*')}"
     puts
   end
-
 end
-
